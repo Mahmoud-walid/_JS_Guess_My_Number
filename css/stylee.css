@@ -1,6 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P';
 }
 
+.container {
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* small */
+@media(min-width:768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* medium */
+@media(min-width:992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* large */
+@media(min-width:1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 150%;
+}
+
+body {
+    background-color: rgb(65, 65, 65);
+}
+
+header {}
+
+header .bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: 10px 10px 50px 10px;
+}
+
+header .bar .btn.again_btn {}
+
+header .between {}
+
+header .guess_txt {
+    text-align: center;
+}
+
+header .guessNumber {
+    position: relative;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 80px;
+    margin: 100px 0px;
+    font-size: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+header .guessNumber::before {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 7px;
+    background-color: white;
+    z-index: -1;
+}
+
+main {
+    margin: 0px 50px;
+    display: grid;
+    gap: 70px;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+main .left {
+    display: flex;
+    flex-direction: column;
+}
+
+main .left .btn.check_btn,
+main .left .select_number {
+    height: 100px;
+    width: 130px;
+    margin: auto;
+    text-align: center;
+    font-size: 170%;
+}
+
+main .left .select_number {
+    background-color: transparent;
+    color: white;
+    border: 3px solid white;
+}
+
+main .left .select_number:focus {
+    outline: none;
+}
+
+main .left .btn.check_btn {
+    width: 50%;
+    margin-top: 20px;
+}
+
+main .right {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+main .right .message {
+    margin-bottom: 40px;
+}
+
+main .right .score_txt {}
+
+main .right .high_score_txt {}
