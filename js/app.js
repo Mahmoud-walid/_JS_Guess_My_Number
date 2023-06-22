@@ -1,31 +1,57 @@
 'use strict'
-const randomNumber = Math.trunc(Math.random() * 20) + 1;
-console.log(randomNumber);
-let scoreElement = Number(document.querySelector(".score_txt .score").innerHTML)
-let score = Number(scoreElement)
 
+'use strict';
+
+let randomNumber = Math.trunc(Math.random() * 20) + 1;
+console.log(randomNumber);
+let score = Number(document.querySelector('.score_txt .score').textContent);
+let selectNumber = document.querySelector('.select_number');
+
+let scoreElement = document.querySelector('.score_txt .score');
+let guessNumberElement = document.querySelector('.guessNumber');
+let messageElement = document.querySelector('.message');
+let highScoreElement = document.querySelector('.high_score_txt .HighScore');
+
+function updateScore(newScore) {
+    score = newScore;
+    scoreElement.textContent = score;
+}
 
 function checkNumber() {
-    const selectNumber = document.querySelector(".select_number").value
-    if (Number(selectNumber) !== randomNumber) {
+    const selectNumberValue = Number(selectNumber.value);
+
+    if (selectNumberValue !== randomNumber) {
         if (score !== 0 || score === randomNumber) {
-            score -= 1;
-            document.querySelector(".score_txt .score").innerHTML = score
+            updateScore(score - 1);
         }
     }
-    if (Number(selectNumber) === randomNumber) {
-        document.querySelector(".guessNumber").innerHTML = randomNumber;
-        document.querySelector(".message").innerHTML = "🎉 Correct answer!"
-        document.body.style.backgroundColor = "green"
-        document.querySelector(".high_score_txt .HighScore").innerHTML = score
-    }
-    else if (selectNumber > randomNumber) {
-        document.querySelector(".message").innerHTML = "Too high!"
+
+    if (selectNumberValue === randomNumber) {
+        guessNumberElement.textContent = randomNumber;
+        messageElement.textContent = '🎉 Correct answer!';
+        document.body.style.backgroundColor = 'green';
+        if (score > Number(highScoreElement.textContent)) {
+            highScoreElement.textContent = score;
+        }
+    } else if (selectNumberValue > randomNumber) {
+        messageElement.textContent = 'Too high!';
     } else {
-        document.querySelector(".message").innerHTML = "Too low!"
+        messageElement.textContent = 'Too low!';
     }
 }
 
 function againBtn() {
-    location.reload()
+    randomNumber = Math.trunc(Math.random() * 20) + 1;
+    console.log(randomNumber);
+    updateScore(20);
+    guessNumberElement.textContent = '?';
+    messageElement.textContent = '🎉 Start guessing...';
+    document.body.style.backgroundColor = 'rgb(65, 65, 65)';
+    selectNumber.value = '';
 }
+
+selectNumber.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        checkNumber();
+    }
+});
